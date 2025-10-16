@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIMATIKA - STMIK DCI Kota Tasikmalaya</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Variabel Warna */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        /* Header & Navigasi */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('images/hero-bg.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        /* Tentang Kami */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Sejarah HIMATIKA */
+        .history {
+            background-color: var(--light);
+        }
+
+        .history-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .history-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            transform: translateX(-100%);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Berita & Kegiatan - Diperbarui */
+        .news {
+            background-color: white;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .news-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .news-card:hover .news-img img {
+            transform: scale(1.1);
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .news-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .news-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .news-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .news-date::before {
+            content: "📅";
+            font-size: 1rem;
+        }
+
+        /* Program Kerja */
+        .programs {
+            background-color: white;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .program-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-icon {
+            background-color: var(--secondary);
+            color: white;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .program-content {
+            padding: 1.5rem;
+        }
+
+        .program-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .program-content p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Pengurus */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .team-card:hover .team-img img {
+            transform: scale(1.1);
+        }
+
+        .team-info {
+            padding: 1.5rem;
+        }
+
+        .team-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .team-info p {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* Struktur Pengurus Lengkap */
+        .structure {
+            background-color: var(--light);
+        }
+
+        .structure-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .structure-category {
+            margin-bottom: 3rem;
+        }
+
+        .structure-title {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0;
+        }
+
+        .structure-title h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .structure-members {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .member-item {
+            padding: 0.8rem;
+            border-left: 3px solid var(--secondary);
+            background-color: #f8f9fa;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .member-nim {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .coordinator {
+            background-color: #e8f4fd;
+            border-left-color: #e74c3c;
+        }
+
+        /* Kontak - Diperbarui */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            background-color: var(--secondary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .contact-details p {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Footer - Diperbarui */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-about, .footer-history, .footer-links, .footer-social {
+            padding: 0 1rem;
+        }
+
+        .footer-about h3, .footer-history h4, .footer-links h4, .footer-social h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .footer-about p {
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .footer-history p {
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-links ul li a::before {
+            content: "▸";
+            margin-right: 8px;
+            color: var(--secondary);
+            transition: transform 0.3s;
+        }
+
+        .footer-links ul li a:hover::before {
+            transform: translateX(3px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Logo Media Sosial */
+        .social-logo {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Link Kontak yang Dapat Diklik */
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: inline-block;
+            padding: 0.2rem 0;
+        }
+
+        .contact-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Email Styling - Diperbarui */
+        .email-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .email-address {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--secondary);
+            word-break: break-all;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .email-address:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 0.8rem 1rem;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .history-timeline {
+                padding-left: 1rem;
+            }
+
+            .timeline-year {
+                position: static;
+                transform: none;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+
+            .member-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigasi -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo-himatika.png" alt="Logo HIMATIKA">
+                    <div class="logo-text">
+                        <h1>HIMATIKA</h1>
+                        <p>STMIK DCI Kota Tasikmalaya</p>
+                    </div>
+                </div>
+                <nav>
+                    <div class="mobile-menu">☰</div>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#history">Sejarah</a></li>
+                        <li><a href="#news">Berita & Kegiatan</a></li>
+                        <li><a href="#programs">Program Kerja</a></li>
+                        <li><a href="#team">Pengurus Inti</a></li>
+                        <li><a href="#structure">Struktur Lengkap</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Himpunan Mahasiswa Teknik Informatika</h2>
+            <p>STMIK DCI Kota Tasikmalaya - Wadah pengembangan potensi mahasiswa Teknik Informatika dalam bidang akademik, organisasi, dan kemasyarakatan.</p>
+            <a href="#about" class="btn">Selengkapnya</a>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang HIMATIKA</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>HIMATIKA (Himpunan Mahasiswa Teknik Informatika) STMIK DCI Kota Tasikmalaya merupakan organisasi kemahasiswaan yang mewadahi mahasiswa Program Studi Teknik Informatika. Organisasi ini didirikan dengan tujuan untuk meningkatkan kualitas akademik dan non-akademik mahasiswa.</p>
+                    <p>Kami berkomitmen untuk mengembangkan potensi mahasiswa melalui berbagai kegiatan seperti seminar, workshop, kompetisi, dan pengabdian masyarakat. HIMATIKA juga menjadi jembatan antara mahasiswa dengan pihak kampus dan dunia industri.</p>
+                    <p>Dengan semangat kolaborasi dan inovasi, HIMATIKA terus berupaya menciptakan lingkungan yang kondusif bagi pengembangan diri mahasiswa Teknik Informatika STMIK DCI Kota Tasikmalaya.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/tentang-himatika.jpg" alt="Kegiatan HIMATIKA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sejarah HIMATIKA -->
+    <section class="history" id="history">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sejarah HIMATIKA</h2>
+            </div>
+            <div class="history-content">
+                <div class="history-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2015</div>
+                        <div class="timeline-content">
+                            <h3>Pendirian HIMATIKA</h3>
+                            <p>HIMATIKA STMIK DCI Kota Tasikmalaya didirikan oleh sekelompok mahasiswa Teknik Informatika yang memiliki visi untuk meningkatkan kualitas akademik dan non-akademik mahasiswa.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2016</div>
+                        <div class="timeline-content">
+                            <h3>Pengakuan Resmi</h3>
+                            <p>HIMATIKA mendapatkan pengakuan resmi dari pihak kampus sebagai organisasi kemahasiswaan yang sah dan diakui keberadaannya.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2018</div>
+                        <div class="timeline-content">
+                            <h3>Ekspansi Program</h3>
+                            <p>HIMATIKA mulai mengembangkan berbagai program kerja yang lebih beragam, termasuk kompetisi teknologi, workshop, dan pengabdian masyarakat.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-content">
+                            <h3>Adaptasi Digital</h3>
+                            <p>Di masa pandemi, HIMATIKA berhasil beradaptasi dengan menyelenggarakan kegiatan secara daring dan meningkatkan kehadiran digital melalui media sosial.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-content">
+                            <h3>Konsolidasi dan Regenerasi</h3>
+                            <p>HIMATIKA melakukan konsolidasi internal dan regenerasi kepengurusan untuk memastikan keberlanjutan organisasi di masa depan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Berita & Kegiatan - Diperbarui -->
+    <section class="news" id="news">
+        <div class="container">
+            <div class="section-title">
+                <h2>Berita & Kegiatan</h2>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="images/kegiatan1.jpg" alt="Workshop Web Development">
+                    </div>
+                    <div class="news-content">
+                        <h3>First Gathering UKM & ORMAWA</h3>
+                        <p>Kegiatan First Gathering berhasil menciptakan ruang keakraban dan menjalin sinergi awal antar seluruh UKM dan Ormawa. Acara ini menjadi fondasi yang solid untuk membangun kolaborasi yang produktif di masa depan.</p>
+                        <div class="news-date">02 Oktober 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="images/kegiatan2.jpg" alt="Hackathon Nasional">
+                    </div>
+                    <div class="news-content">
+                        <h3>Pelantikan Akbar STMIK DCI</h3>
+                        <p>Momen Pelantikan Akbar secara resmi mengukuhkan dan mengangkat seluruh pengurus HIMATIKA periode baru. Acara ini menjadi simbol penyerahan amanah dan penyalaan semangat baru untuk berkarya dan mengabdi.</p>
+                        <div class="news-date">03 Oktober 2025</div>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="images/kegiatan3.jpg" alt="Pengabdian Masyarakat">
+                    </div>
+                    <div class="news-content">
+                        <h3>Rapat Kerja HIMATIKA</h3>
+                        <p>Rapat Kerja berhasil menyusun peta jalan organisasi untuk periode kepengurusan ini. Dalam raker ini, seluruh program kerja dirancang secara strategis dan terukur untuk memastikan arah serta target HIMATIKA tercapai dengan optimal.</p>
+                        <div class="news-date">14 Oktober 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Kerja -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Program Kerja</h2>
+            </div>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i>📱</i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Divisi Media dan Informasi</h3>
+                        <p>Bertanggung jawab dalam pengelolaan media sosial, website, dan publikasi informasi kegiatan HIMATIKA kepada mahasiswa dan masyarakat umum.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i>💼</i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Divisi Pengembangan Karir</h3>
+                        <p>Menyelenggarakan workshop, pelatihan soft skills, dan membangun jaringan dengan perusahaan untuk meningkatkan kompetensi dan peluang karir mahasiswa.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i>🤝</i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Divisi Eksternal, Sosial, dan Pengabdian Masyarakat</h3>
+                        <p>Membangun relasi dengan pihak eksternal, mengadakan kegiatan sosial, dan program pengabdian kepada masyarakat.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i>🔬</i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Divisi Riset dan Teknologi</h3>
+                        <p>Mendorong inovasi melalui penelitian, kompetisi teknologi, hackathon, dan pengembangan project berbasis teknologi informasi.</p>
+                    </div>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i>👥</i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Divisi Keanggotaan dan Kaderisasi</h3>
+                        <p>Mengelola keanggotaan, rekrutmen, dan program kaderisasi untuk regenerasi kepengurusan HIMATIKA.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pengurus Inti -->
+    <section id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pengurus Inti HIMATIKA</h2>
+                <p>Struktur kepengurusan periode 2025/2026</p>
+            </div>
+            <div class="team-grid">
+                <!-- Ketua dan Wakil Ketua -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="images/ketua-himatika.jpg" alt="Ketua HIMATIKA">
+                    </div>
+                    <div class="team-info">
+                        <h3>Muhamad Mab'utsul Haroki</h3>
+                        <p>Ketua HIMATIKA</p>
+                        <p class="member-nim">11230038</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="images/wakil-ketua.jpg" alt="Wakil Ketua HIMATIKA">
+                    </div>
+                    <div class="team-info">
+                        <h3>Rizki Abdul Rohman</h3>
+                        <p>Wakil Ketua HIMATIKA</p>
+                        <p class="member-nim">11240046</p>
+                    </div>
+                </div>
+                
+                <!-- Sekretaris I dan II -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="images/sekretaris1.jpg" alt="Sekretaris I HIMATIKA">
+                    </div>
+                    <div class="team-info">
+                        <h3>Syifa Fauziah</h3>
+                        <p>Sekretaris I</p>
+                        <p class="member-nim">11230069</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="images/sekretaris2.jpg" alt="Sekretaris II HIMATIKA">
+                    </div>
+                    <div class="team-info">
+                        <h3>Shofia Fatima Tuzzahro</h3>
+                        <p>Sekretaris II</p>
+                        <p class="member-nim">11240017</p>
+                    </div>
+                </div>
+                
+                <!-- Bendahara I dan II -->
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="images/bendahara1.jpg" alt="Bendahara I HIMATIKA">
+                    </div>
+                    <div class="team-info">
+                        <h3>Nadilla Millata Hanipah</h3>
+                        <p>Bendahara I</p>
+                        <p class="member-nim">11230035</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="images/bendahara2.jpg" alt="Bendahara II HIMATIKA">
+                    </div>
+                    <div class="team-info">
+                        <h3>Ani Rahmawati</h3>
+                        <p>Bendahara II</p>
+                        <p class="member-nim">11240062</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Struktur Pengurus Lengkap -->
+    <section class="structure" id="structure">
+        <div class="container">
+            <div class="section-title">
+                <h2>Struktur Pengurus Lengkap</h2>
+                <p>HIMATIKA STMIK DCI Periode 2025/2026</p>
+            </div>
+            <div class="structure-content">
+                <!-- Divisi Media & Informasi -->
+                <div class="structure-category">
+                    <div class="structure-title">
+                        <h3>Divisi Media & Informasi</h3>
+                    </div>
+                    <div class="structure-members">
+                        <div class="member-list">
+                            <div class="member-item coordinator">
+                                <div class="member-name">Ade Nurasiam (Koordinator)</div>
+                                <div class="member-nim">11230037</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Naysilla Putri Nabila</div>
+                                <div class="member-nim">11240072</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Aris Miya Somantri</div>
+                                <div class="member-nim">11240082</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Rifan Abdurrauf</div>
+                                <div class="member-nim">11240009</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Silva Amami</div>
+                                <div class="member-nim">11240014</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Alifa Nurani Suci</div>
+                                <div class="member-nim">11240019</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisi Pengembangan Karir -->
+                <div class="structure-category">
+                    <div class="structure-title">
+                        <h3>Divisi Pengembangan Karir</h3>
+                    </div>
+                    <div class="structure-members">
+                        <div class="member-list">
+                            <div class="member-item coordinator">
+                                <div class="member-name">Aulia (Koordinator)</div>
+                                <div class="member-nim">11230039</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Indah Mailina</div>
+                                <div class="member-nim">11230022</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Nazwa Arifah</div>
+                                <div class="member-nim">11230047</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Ineufina Lestari</div>
+                                <div class="member-nim">11240015</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Anis Siti Nurjanah</div>
+                                <div class="member-nim">11240039</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Novianti Ramadani</div>
+                                <div class="member-nim">11240028</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisi Eksternal, Sosial & Pengabdian Masyarakat -->
+                <div class="structure-category">
+                    <div class="structure-title">
+                        <h3>Divisi Eksternal, Sosial & Pengabdian Masyarakat</h3>
+                    </div>
+                    <div class="structure-members">
+                        <div class="member-list">
+                            <div class="member-item coordinator">
+                                <div class="member-name">Fajar Ramdani Purnama (Koordinator)</div>
+                                <div class="member-nim">11230017</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Asep Mukhtarudin</div>
+                                <div class="member-nim">11230045</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Desi Alzany</div>
+                                <div class="member-nim">11240013</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Nurlaila</div>
+                                <div class="member-nim">11240020</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Maima</div>
+                                <div class="member-nim">11240029</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Ikhsan Nugraha</div>
+                                <div class="member-nim">11240073</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Ai Wardah Nurwahidah</div>
+                                <div class="member-nim">11240021</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisi Riset & Teknologi -->
+                <div class="structure-category">
+                    <div class="structure-title">
+                        <h3>Divisi Riset & Teknologi</h3>
+                    </div>
+                    <div class="structure-members">
+                        <div class="member-list">
+                            <div class="member-item">
+                                <div class="member-name">Afrizal Wahyu</div>
+                                <div class="member-nim">11230070</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Fasyaharani Firdausyinia Zanis</div>
+                                <div class="member-nim">11240041</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Paiz Hidayatuloh</div>
+                                <div class="member-nim">11240027</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divisi Keanggotaan & Kaderisasi -->
+                <div class="structure-category">
+                    <div class="structure-title">
+                        <h3>Divisi Keanggotaan & Kaderisasi</h3>
+                    </div>
+                    <div class="structure-members">
+                        <div class="member-list">
+                            <div class="member-item coordinator">
+                                <div class="member-name">M Rehan Paujan (Koordinator)</div>
+                                <div class="member-nim">11230051</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Nur Holis</div>
+                                <div class="member-nim">11230030</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Rendi Febrian</div>
+                                <div class="member-nim">11240045</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Muhammad Salman Luthfi Al Fariji</div>
+                                <div class="member-nim">11240040</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Inqyadah</div>
+                                <div class="member-nim">11230096</div>
+                            </div>
+                            <div class="member-item">
+                                <div class="member-name">Pepi Risalatul Fitroh</div>
+                                <div class="member-nim">1123094</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak - Diperbarui dengan Email yang Lebih Rapi -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontak Kami</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h3>Alamat</h3>
+                        <p>
+                            <a href="https://share.google/HWAXOHlIuZLludBPT" target="_blank" class="contact-link">
+                                STMIK DCI Kota Tasikmalaya<br>
+                                Jl. Sutisna Senjaya No.158-A, Cikalang, Kec. Tawang, Kab. Tasikmalaya, Jawa Barat 46112
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <div class="email-container">
+                            <a href="mailto:himatikastmikdcitasikmalaya@gmail.com" class="email-address">
+                                himatikastmikdcitasikmalaya@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h3>Media Sosial</h3>
+                        <p>
+                            <strong>YouTube:</strong> 
+                            <a href="https://youtube.com/@himatikastmikdci" target="_blank" class="contact-link">
+                                HIMATIKA STMIK DCI
+                            </a><br>
+                            <strong>Instagram:</strong> 
+                            <a href="https://www.instagram.com/himatika.stmik.dci?igsh=a2VqN2dqaGp0NGtw" target="_blank" class="contact-link">
+                                @himatika_stmikdci
+                            </a><br>
+                            <strong>TikTok:</strong> 
+                            <a href="https://tiktok.com/@himatika_stmikdci" target="_blank" class="contact-link">
+                                @himatika_stmikdci
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Diperbarui dengan Link Media Sosial -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>HIMATIKA STMIK DCI</h3>
+                    <p>Himpunan Mahasiswa Teknik Informatika STMIK DCI Kota Tasikmalaya. Wadah pengembangan potensi mahasiswa TI dalam bidang akademik, organisasi, dan kemasyarakatan.</p>
+                </div>
+                
+                <div class="footer-history">
+                    <h4>Sejarah Singkat</h4>
+                    <p>HIMATIKA didirikan pada tahun 2015 dan telah menjadi organisasi kemahasiswaan yang aktif dalam mengembangkan potensi mahasiswa Teknik Informatika STMIK DCI Tasikmalaya.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                        <li><a href="#history">Sejarah</a></li>
+                        <li><a href="#news">Berita & Kegiatan</a></li>
+                        <li><a href="#programs">Program Kerja</a></li>
+                        <li><a href="#team">Pengurus Inti</a></li>
+                        <li><a href="#structure">Struktur Lengkap</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Ikuti Kami</h4>
+                    <div class="social-icons">
+                        <a href="https://youtube.com/@himatikastmikdci" target="_blank" title="YouTube">
+                            <svg class="social-logo" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M19.67 8.12C19.58 7.84 19.39 7.56 19.12 7.35C18.85 7.14 18.53 7 18.18 6.93C16.61 6.66 12 6.66 12 6.66C12 6.66 7.39 6.66 5.82 6.93C5.47 7 5.15 7.14 4.88 7.35C4.61 7.56 4.42 7.84 4.33 8.12C4.15 8.68 4.05 9.36 4.05 10.08C4.05 10.8 4.15 11.48 4.33 12.04C4.42 12.32 4.61 12.6 4.88 12.81C5.15 13.02 5.47 13.16 5.82 13.23C7.39 13.5 12 13.5 12 13.5C12 13.5 16.61 13.5 18.18 13.23C18.53 13.16 18.85 13.02 19.12 12.81C19.39 12.6 19.58 12.32 19.67 12.04C19.85 11.48 19.95 10.8 19.95 10.08C19.95 9.36 19.85 8.68 19.67 8.12ZM10.2 11.65V8.51L13.8 10.08L10.2 11.65Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/himatika.stmik.dci?igsh=a2VqN2dqaGp0NGtw" target="_blank" title="Instagram">
+                            <svg class="social-logo" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://tiktok.com/@himatika_stmikdci" target="_blank" title="TikTok">
+                            <svg class="social-logo" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 HIMATIKA STMIK DCI Kota Tasikmalaya. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    document.querySelector('nav ul').classList.remove('show');
+                }
+            });
+        });
+
+        // Add scroll animation effect
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Add hover effect to program cards
+        document.querySelectorAll('.program-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
